@@ -1,0 +1,79 @@
+{% extends "./base.html" %}
+
+{% block title%} Autores{% endblock %}
+
+{% block body%}
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <h2>Listado de Libros</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/registrarLibro/" method="post">{% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtTitulo" name="txtTitulo" class="form-control" placeholder="Titulo Libro" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <select class="form-select" aria-label="Default select example" id="txtAutorLibro" name="txtAutorLibro">
+                            {% for a in autor%}
+                            <option value={{a.idAutor}}>{{a.NombreAutor}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <select class="form-select" aria-label="Default select example" id="txtCategoriaLibro" name="txtCategoriaLibro">
+                            {% for c in categoria%}
+                            <option value={{c.idCategoria}}>{{c.NombreCategoria}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <select class="form-select" aria-label="Default select example" id="txtEditorialLibro" name="txtEditorialLibro">
+                            {% for e in editoriales%}
+                            <option value="{{e.idEditorial}}">{{e.NombreEditorial}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                    </div>
+                    <br>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <div class="table-responsive py-2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Titulo</th>
+                        <th>Autor</th>
+                        <th>Categoria</th>
+                        <th>Editorial</th>
+                        <th colspan="2">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for l in libros%}
+                    <tr>
+                        <td>{{l.idLibro}}</td>
+                        <td>{{l.tituloLibro}}</td>
+                        <td>{{l.id_autor}}</td>
+                        <td>{{l.id_categoria}}</td>
+                        <td>{{l.id_editorial}}</td>
+                        <td><a href="EdicionLibro/{{l.idLibro}}" class="btn btn-info">Editar</a></td>
+                        <td><a href="eliminarLibro/{{l.idLibro}}" class="btn btn-danger">Eliminar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

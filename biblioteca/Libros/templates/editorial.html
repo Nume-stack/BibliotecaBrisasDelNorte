@@ -1,0 +1,53 @@
+{% extends "./base.html" %}
+
+{% block title%} Autores{% endblock %}
+
+{% block body%}
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <h2>Listado de Editoriales</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/registrarEditorial/" method="post">{% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtEditorial" name="txtEditorial" class="form-control" placeholder="Editorial" required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                    </div>
+                    <br>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <div class="table-responsive py-2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Editorial</th>
+                        <th>Activos</th>
+                        <th>Actualizacion</th>
+                        <th colspan="2">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for e in editoriales%}
+                    <tr>
+                        <td>{{e.idEditorial}}</td>
+                        <td>{{e.NombreEditorial}}</td>
+                        <td>{{e.activoEditorial}}</td>
+                        <td>{{e.actualizaEditorial}}</td>
+                        <td><a href="EdicionEditorial/{{e.idEditorial}}" class="btn btn-info">Editar</a></td>
+                        <td><a href="eliminarEditorial/{{e.idEditorial}}" class="btn btn-danger">Eliminar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

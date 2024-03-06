@@ -1,0 +1,38 @@
+{% extends "./base.html" %}
+
+{% block title%}Editar Autores{% endblock %}
+
+{% block body%}
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <h2>Editar Categoria</h2>
+            <div class="card">
+                <div class="card-body">
+                    <form action="/editarCategorias/{{categorias.idCategoria}}" method="post">{% csrf_token %}
+                        <div class="form-group">
+                            <input type="text" id="txtIdCategoria" name="txtIdCategoria" class="form-control"  value="{{categorias.idCategoria}}" placeholder="Nombre Categoria" disabled>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input type="text" id="txtCategoria" name="txtCategoria" class="form-control"  value="{{categorias.NombreCategoria}}" placeholder="Categoria" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <select class="form-select" aria-label="Default select example" id="txtActivo" name="txtActivo">
+                                <option selected></option>
+                                <option value="True">Activo</option>
+                                <option value="False">Desactivado</option>
+                              </select>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-block text-white">Editar</button>
+                        </div>
+                        <br>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

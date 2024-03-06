@@ -1,0 +1,54 @@
+{% extends "./base.html" %}
+
+{% block title%} Categorias {% endblock %}
+
+{% block body%}
+
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <h2>Listado de Categorias</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/registrarCategoria/" method="post">{% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtCategoria" name="txtCategoria" class="form-control" placeholder="Categoria" >
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                    </div>
+                    <br>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <div class="table-responsive py-2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Categoria</th>
+                        <th>Activo</th>
+                        <th>Actualizacion</th>
+                        <th colspan="2">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in categoria%}
+                    <tr>
+                        <td>{{c.idCategoria}}</td>
+                        <td>{{c.NombreCategoria}}</td>
+                        <td>{{c.activoCategoria}}</td>
+                        <td>{{c.actualizaCategoria}}</td>
+                        <td><a href="EdicionCategoria/{{c.idCategoria}}" class="btn btn-info">Editar</a></td>
+                        <td><a href="eliminarCategoria/{{c.idCategoria}}" class="btn btn-danger">Eliminar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
